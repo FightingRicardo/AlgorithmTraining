@@ -1,0 +1,105 @@
+package LeetCode;
+
+import java.util.Scanner;
+
+public class isPalindrome {
+	
+	//solution 1:
+	public boolean reverse(int org) {		
+		int ans = org;
+    int rev = 0;
+	    
+//	    if (ans<0) {
+//	    	String tmp = String.valueOf(ans);
+//	    	ans = Integer.valueOf((tmp.substring(1)));
+//	    }
+    if(ans < 0 || (ans % 10 == 0 && ans != 0)) {
+      //the number is negative or the unit digit is 0, then return "false" directly
+        return false;
+    }
+	    
+    while (ans != 0){
+        int pop = ans % 10;
+        ans /= 10;
+        if(rev > Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) {
+          System.out.println(String.valueOf(Integer.MAX_VALUE/10));
+          return false;
+        }
+        if(rev < Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) return false;
+        rev = rev * 10 +pop;
+    }
+    return (org == rev);
+	}
+
+	//solution 2:
+	public boolean split(int org) {
+		String str;
+		str = String.valueOf(org);
+		char[] orgArr = str.toCharArray();			
+		
+//		StringBuffer sb = new StringBuffer();//StringBuffer is just a string
+//		for (char c : orgArr) {
+//			sb.append(orgArr[0]);
+//		}	
+//		return str.equals(sb);
+		
+    char[] revArr = new char[orgArr.length];
+    for (int i = 0; i < orgArr.length; i++) {
+      revArr[i] = orgArr[orgArr.length - i - 1];
+    }
+    String a = String.copyValueOf(revArr);
+    String b = String.copyValueOf(orgArr);
+    if (a.compareTo(b) == 0)
+      return true;
+    else
+      return false;
+	}
+	
+	//solution 3:
+	public boolean dirReverse(int org) {
+    String reversedStr = (new StringBuilder(org + "")).reverse().toString();//StringBuilder is faster than StringBuffer
+    return (org + "").equals(reversedStr);
+
+    //auther: MisterBooo
+    //link: https://leetcode-cn.com/problems/palindrome-number/solution/dong-hua-hui-wen-shu-de-san-chong-jie-fa-fa-jie-ch/		
+	}
+
+	//solution 4:
+	public boolean halfReverse(int org) {
+		
+    if(org < 0 || (org % 10 == 0 && org != 0)) {
+        return false;
+    }
+
+    int rev = 0;
+    while(org > rev) {//so that the process would be executed to the half of the number
+      rev = rev * 10 + org % 10;
+        org /= 10;
+    }
+
+    // if the length of the number is odd, we can remove the middle number by "revertedNumber/10"
+    // eg. when input 12321, at the end of while iteration, we can get org=12, rev=123.
+    // since the middle number would not affect the final result (cause it would be the same as itself all the time),
+    // we can just remove it
+    return org == rev || org == rev/10;
+
+		//auther: LeetCode
+		//Link: https://leetcode-cn.com/problems/palindrome-number/solution/hui-wen-shu-by-leetcode/
+	}
+	public static void main(String[] args) {		
+		
+		Scanner in = new Scanner(System.in);
+		int org = in.nextInt();
+		isPalindrome rev = new isPalindrome();
+		
+		//Solution 1:
+		System.out.println(String.valueOf(rev.reverse(org)));		
+		//Solution 2:
+		System.out.println(String.valueOf(rev.split(org)));	
+		//Solution 3:
+		System.out.println(String.valueOf(rev.dirReverse(org)));	
+		//Solution 3:
+		System.out.println(String.valueOf(rev.halfReverse(org)));
+	}
+
+}
