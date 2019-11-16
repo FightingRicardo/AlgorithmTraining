@@ -1,0 +1,96 @@
+package LeetCode;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class RomanInteger {
+
+    public int romanToInt(String s) {
+    	
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        map.put("I", 1);
+        map.put("V", 5);
+        map.put("X", 10);
+        map.put("L", 50);
+        map.put("C", 100);
+        map.put("D", 500);
+        map.put("M", 1000);
+        map.put("IV", 4);
+        map.put("IX", 9);
+        map.put("XL", 40);
+        map.put("XC", 90);
+        map.put("CD", 400);
+        map.put("CM", 900);
+        
+    	char[] ch = s.toCharArray();
+    	int[] flag = new int[ch.length];
+    	for(int i = 0; i<ch.length - 1; i ++) {
+    		if (map.get(String.valueOf(ch[i])) >= map.get(String.valueOf(ch[i+1]))) 
+    			flag[i] = 1;
+    		else 
+    			flag[i] = 0;
+    	}
+    	
+    	int count = 0;
+    	int sum = 0;
+    	while(count<ch.length) {
+    		if(flag[count] == 1 || count == ch.length - 1) {
+    			sum += map.get(String.valueOf(ch[count]));
+    			count++;   			
+    		}
+    		else {
+    			sum += map.get(String.valueOf(ch[count]) + String.valueOf(ch[count + 1]));
+    			count += 2; 
+    		}    			    		
+    	}
+    	return sum;
+    	
+    	/*
+    	其实只要每次比较后一个和前一个的值的大小关系即可：
+			前值小于后值，减去前值
+			前值大于或等于后值，加上前值
+			最后一个值必然是加上的
+        public int romanToInt(String s) {
+            int sum = 0;
+            int preNum = getValue(s.charAt(0));
+            for(int i = 1;i < s.length(); i ++) {
+                int num = getValue(s.charAt(i));
+                if(preNum < num) {
+                    sum -= preNum;
+                } else {
+                    sum += preNum;
+                }
+                preNum = num;
+            }
+            sum += preNum;
+            return sum;
+        }
+        
+        private int getValue(char ch) {
+            switch(ch) {
+                case 'I': return 1;
+                case 'V': return 5;
+                case 'X': return 10;
+                case 'L': return 50;
+                case 'C': return 100;
+                case 'D': return 500;
+                case 'M': return 1000;
+                default: return 0;
+            }
+        }
+        
+        author: donespeak
+        link: https://leetcode-cn.com/problems/roman-to-integer/solution/yong-shi-9993nei-cun-9873jian-dan-jie-fa-by-donesp/
+        */
+    }
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		String x = in.nextLine();
+		
+		RomanInteger ri = new RomanInteger();
+		int sum = ri.romanToInt(x);
+		
+		System.out.println(String.valueOf(sum));
+	}
+
+}
