@@ -1,0 +1,49 @@
+package LeetCode;
+
+import java.util.HashMap;
+import java.util.Stack;
+
+public class isValid {
+
+    public boolean isValid(String s) {
+        HashMap<Character, Character> maps = new HashMap<Character, Character>();
+        maps.put('}','{');
+        maps.put(']','[');
+        maps.put(')','(');
+        
+        if (s.length() == 0)
+        	return true;
+        else if ((s.length() & 1) == 1)
+        	return false;
+        
+        Stack<Character> stack = new Stack();
+        for (int i = 0; i < s.length() ; i++) {
+        	char tmp = s.charAt(i);
+        	if (maps.containsValue(tmp)) {
+        		stack.push(tmp);
+        	}
+        	else if (maps.containsKey(tmp)) {
+        		if (stack.isEmpty() || stack.pop() != maps.get(tmp)) 
+        			return false;
+        	}
+        }
+        return stack.isEmpty();
+//        for(int i = 0; i < s.length(); i += 2) {
+//        	String tmp = maps.put("{", "}");
+//        	if((maps.containsValue(maps.get(tmp))))
+//        		return false;       		
+//        }
+        
+//    	return true;
+    }
+	public static void main(String[] args) {
+		String str = "{([])(())}";
+		
+		isValid  valid = new isValid();
+		boolean result = valid.isValid(str);
+		
+		System.out.println(result);
+
+	}
+
+}
