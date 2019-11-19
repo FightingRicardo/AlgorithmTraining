@@ -1,0 +1,61 @@
+package LeetCode;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class longestCommonPrefix {
+	
+	public String comparStr(String[] strs) {
+//		StringBuffer sameStr = new StringBuffer();
+		if (strs == null || strs.length == 0) 
+			return "";
+		for (int i = 0; i < strs[0].length(); i++) {
+			char tmp = strs[0].charAt(i);
+			for (int j = 1; j < strs.length ; j++) {
+				if (i == strs[j].length() || tmp != strs[j].charAt(i))
+					return strs[0].substring(0, i);
+			}	
+		}
+		return strs[0];
+//		//Author: LeetCode
+//		//Link: https://leetcode-cn.com/problems/longest-common-prefix/solution/zui-chang-gong-gong-qian-zhui-by-leetcode/
+		
+//		ArrayList<char[]> elementStr = new ArrayList<char[]>();		
+//		int limit = 10000000;
+//		for (String s: strs) {//get every string elements
+//			elementStr.add(s.toCharArray());
+//			if (limit > s.length())
+//				limit = s.length();
+//		}
+//		for (int i = 0; i < limit; i++) {
+//			char tmp = elementStr.get(0)[i];
+//			int tmpcount = 1;
+//			for (int j = 1; j < strs.length; j++) {
+//				if (tmp == elementStr.get(j)[i]) {
+//					tmpcount++;
+//					if(tmpcount == count) {
+//						sameStr.append(tmp);
+//					}
+//				}
+//				else
+//					break;
+//			}
+//		}
+//		if (sameStr.toString().isEmpty())
+//			return "None";
+//		else
+//			return sameStr.toString();
+	}
+	
+	public static void main(String[] args) {
+
+		String[] strs = {"flower","flow","flight"};//{"dog","racecar","car"};
+		
+		longestCommonPrefix  compare = new longestCommonPrefix();
+		String result = compare.comparStr(strs);
+		
+		System.out.println(result);
+
+	}
+
+}
