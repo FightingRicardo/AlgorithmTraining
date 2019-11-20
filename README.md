@@ -1,7 +1,7 @@
 # AlgorithmTraining
 Notebook of algorithm training using LeetCode
 
-# Summarization of the practise
+# Summarization of the practise(LeetCode)
 0001TwoSum                -->HashMap***
 0007ReverseInteger        -->Calculation operation (division and mode methods), and range of data format
 0009PalindromeNumber	    -->Operation of chars/strings, also the algorithm
