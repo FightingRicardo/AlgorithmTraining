@@ -1,0 +1,35 @@
+package LeetCode;
+
+public class RemoveDuplicates {
+
+    public int removeDuplicates(int[] nums) {
+    	if (nums == null || nums.length == 0)
+    		return 0;
+    	int pre = 0;
+    	int aft = 1;
+    	while(aft < nums.length) {
+    		if (nums[pre] == nums[aft]) {
+    			aft++;
+    		}
+    		else {
+    			nums[pre + 1] = nums[aft];
+    			pre++;
+    			aft++;
+    		}
+    	}
+		return pre+1;      
+    }
+
+    //Reference:
+    //author: max-LFszNScOfE
+    //link: https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/solution/shuang-zhi-zhen-shan-chu-zhong-fu-xiang-dai-you-hu/
+	public static void main(String[] args) {
+		int[] in = {1,1,2,3,3,4,4,4,5};
+		
+		RemoveDuplicates rd = new RemoveDuplicates();
+		int numOfUniquenumber = rd.removeDuplicates(in);
+		
+		System.out.print(String.valueOf(numOfUniquenumber));
+	}
+
+}
