@@ -11,3 +11,4 @@ Notebook of algorithm training using LeetCode
 0021MergeTwoSortedLists   -->ListNode***, and the relationship between variables and values
 0026RemoveDuplicates      -->two pointer
 0027RemoveElement         -->two pointer
+0028FindStringLocation    -->pay attention to the border condition
