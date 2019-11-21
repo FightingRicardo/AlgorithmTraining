@@ -1,0 +1,76 @@
+package LeetCode;
+
+public class RemoveElement {
+
+	public int removeElement(int[] nums, int val) {
+		if(nums == null || nums.length == 0 ) 
+			return 0;
+//		int arrayLength = mysolution(nums, val);
+//		int arrayLength = solution2(nums, val);
+		int arrayLength = solution1(nums, val);
+
+		return arrayLength;
+	}
+	
+	public int solution2(int[]nums, int val) {
+		int pre = 0;
+		int post = nums.length;
+		while (pre < post) {
+			if(nums[pre] == val) {
+				nums[pre] = nums[post - 1];
+				post--;
+			}
+			else
+				pre++;
+		}
+		return post;
+	}
+	
+	public int solution1(int[]nums, int val) {
+		int i = 0; int j = 0;
+		while(j<nums.length) {
+			if(nums[j] != val ) {
+				nums[i] = nums[j];
+				i++;j++;
+			}
+			else
+				j++;
+		}
+		return i;
+	}
+	
+	public int mysolution(int[]nums, int val) {
+		int pre = 0;
+		int post = nums.length - 1;
+		int repeatEle = 0;
+		while(pre != post) {
+			if(nums[pre] == val) {
+				repeatEle = nums[pre];
+				for(int i = pre; i < post; i++) {
+					int q = i;
+					int p = q + 1;
+					nums[q] = nums[p];//the first step of the iteration is equal to pre++;
+					//System.out.println("The "+ String.valueOf(q) + "th element of the nums is " + String.valueOf(nums[q]));
+				}
+				nums[post] = repeatEle;
+				post--;				
+				//System.out.println("------------------------------");
+			}
+			else {
+				pre++;
+			}
+		}
+		return post;
+	}
+	
+	public static void main(String[] args) {
+		int[] in = {3,2,2,4,3};
+		
+		RemoveElement re = new RemoveElement();
+		int numOfRemainarray = re.removeElement(in,3);
+		
+		System.out.print(String.valueOf(numOfRemainarray));
+
+	}
+
+}
