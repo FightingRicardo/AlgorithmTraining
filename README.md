@@ -12,3 +12,5 @@ Notebook of algorithm training using LeetCode
 0026RemoveDuplicates      -->two pointer
 0027RemoveElement         -->two pointer
 0028FindStringLocation    -->pay attention to the border condition
+0035SearchInsert          -->half search, pay attention to the border condition
+0038CountAndSay           -->stack,StringBuffer,Queue, and most importantly, the algorithm
