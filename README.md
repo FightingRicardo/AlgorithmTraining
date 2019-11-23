@@ -14,3 +14,5 @@ Notebook of algorithm training using LeetCode
 0028FindStringLocation    -->pay attention to the border condition
 0035SearchInsert          -->half search, pay attention to the border condition
 0038CountAndSay           -->stack,StringBuffer,Queue, and most importantly, the algorithm
+0053MaxSubarraySum        -->Dynamic Planning
+0058LastWordLength        -->String operation
