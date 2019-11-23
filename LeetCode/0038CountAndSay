@@ -1,56 +1,100 @@
-Implement strStr().
-Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+The count-and-say sequence is the sequence of integers with the first five terms as following:
 
-Example 1:
-Input: haystack = "hello", needle = "ll"
-Output: 2
+1.     1
+2.     11
+3.     21
+4.     1211
+5.     111221
+1 is read off as "one 1" or 11.
+11 is read off as "two 1s" or 21.
+21 is read off as "one 2, then one 1" or 1211.
 
-Example 2:
-Input: haystack = "aaaaa", needle = "bba"
-Output: -1
+Given an integer n where 1 ≤ n ≤ 30, generate the nth term of the count-and-say sequence.
 
-Link: https://leetcode-cn.com/problems/implement-strstr
-/*********************************************************/
+Note: Each term of the sequence of integers will be represented as a string.
+
+Link: https://leetcode-cn.com/problems/count-and-say
+/********************************************************/
 
 package LeetCode;
 
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.LinkedList;
 
-public class SearchInsert {
-	
-	public int searchinsert (int[] nums, int target) {
-		if (nums.length == 0)
-			return -1;
-		int i = 0;
-		while(nums[i] != target) {
-			if(i + 1 < nums.length) {
-//				if((nums[i] > target && nums[i+1] < target) || (nums[i] < target && nums[i+1] > target) )
-				if(nums[i] < target && nums[i+1] > target)
-					return i + 1;
-				else if(nums[i] > target && i == 0)
-					return i;
-				else
-					i++;
-			}
-			else {
-				if (nums[i] > target)//here, only the condition of one element is concluded
-					return i;
-				else
-					return i + 1;
-			}
-		}
-		return i;
-	}
+public class CountSay {
+    public String solution1(int n) {
+    	HashMap<String, String> maps = new HashMap<String, String>();
+		maps.put("1", "11");
+		maps.put("11", "21");
+		maps.put("2", "12");
+    	StringBuilder sb = new StringBuilder();
+    	Stack<String> st = new Stack<String>();
+    	String command = "";
+    	st.add("1");
+    	for (int i = 1; i <= n - 1; i++) {
+    		int count = st.size();
+    		for (int j = 0; j < count; j++) 
+    			sb.append(st.pop());
+    		command = sb.toString();
+    		sb.delete(0,sb.length());
+    		
+    		for (int j = command.length(); j > 0; j-- ) {
+    			if (j-2 >= 0) {   				
+        			if(maps.containsKey(command.substring(j-2, j))) {   				
+        				st.add(maps.get(command.substring(j-2, j)));        				
+        				j--;
+        			}
+        			else 
+        				st.add(maps.get(command.substring(j-1, j)));//no j--
+    			}
+    			else 				
+    				st.add(maps.get(command.substring(j-1, j)));
+    		}
+    	}   
+		int count = st.size();
+		for (int j = 0; j < count; j++) 
+			sb.append(st.pop());
+		command = sb.toString();
+    	return command;
+    }
+    public String solution2(int n) {
+    	StringBuilder sb = new StringBuilder();
+    	int count = 0;
+    	int num = 0;
+    	
+    	String k = "1";
+    	String re = "";
+    	
+    	int i = 0;
+    	while(i<n) {
+    		
+    		for(int j = 0 ; j < k.length(); ) {
+    			count = 1;
+    			while(k.length() >= (j + count + 1)) {
+    				if(k.charAt(j) == k.charAt(j + count))
+    					count++;
+    				else
+    					break;
+    			}
+    			num = k.charAt(j) - '0';
+    			j = j + count;
+    			re = String.valueOf(count) + String.valueOf(num);   
+    			sb.append(re);
+    		}
+    		k = sb.toString();
+    		sb.delete(0,sb.length());
+    		i++;
+    	}
+    	return k;
+    }
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		int target = in.nextInt();
-		
-		int[] nums = {1,3,4,5,7,9};
-		SearchInsert si = new SearchInsert();
-		int index = si.searchinsert(nums, target);
-		
-		System.out.println(String.valueOf(index));
+		CountSay cs = new CountSay();
+		for(int i =0; i<30; i++) {
+			String command = cs.solution2(i);
+			System.out.println("The "+ String.valueOf(i)+ "th number is " + command);
+		}
 
 	}
-
 }
