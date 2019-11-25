@@ -1,0 +1,67 @@
+Given a non-empty array of digits representing a non-negative integer, plus one to the integer.
+The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.
+You may assume the integer does not contain any leading zero, except the number 0 itself.
+
+Example 1:
+Input: [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.
+
+Example 2:
+Input: [4,3,2,1]
+Output: [4,3,2,2]
+Explanation: The array represents the integer 4321.
+
+Link: https://leetcode-cn.com/problems/plus-one
+/***********************************************************/
+
+package LeetCode;
+
+public class PlusOne {
+
+    public int[] plusOne(int[] digits) {
+        
+//    	double pre_sum = 0;
+//    	double post_sum = 0;
+//    	int pre_length = digits.length;
+//    	int post_length = 0;
+//    	for(int i = 0; i < pre_length; i++ ) {
+//    		double tmp1 = Math.pow(10, (pre_length - 1 - i));
+//    		double tmp2 = digits[i] * Math.pow(10, (pre_length - 1 - i));
+//    		pre_sum += tmp2;
+//    	}
+//    	post_sum = pre_sum + 1;
+//
+//    	System.out.println(((int)post_sum+"").length());
+//    	post_length = (((int)post_sum+"").length()==pre_length + 1)? (pre_length + 1) : pre_length;
+//    	int[] plusresult = new int[post_length];
+//    	for(int i = 0; i < post_length; i++) {
+//    		double tmp = (post_sum / Math.pow(10, post_length - 1 - i));
+//    		plusresult[i] = (int)tmp;
+//    		post_sum -= (int)tmp * Math.pow(10, post_length - 1 - i);
+//    	}
+//    		
+//    	
+//    	return plusresult;
+    	for(int i = digits.length - 1; i >= 0; i--) {
+    		digits[i]++;
+    		digits[i] = digits[i] % 10;
+    		if(digits[i] != 0)
+    			return digits;
+    	}
+    	digits = new int[digits.length + 1];/***********/
+    	digits[0] = 1;
+    	return digits;
+    }
+    
+	public static void main(String[] args) {
+		int[] digits = {9};
+		PlusOne po = new PlusOne();
+		int[] new_digits = po.plusOne(digits);
+		
+		for(int num:new_digits) {
+			System.out.println(String.valueOf(num));
+		}
+	}
+
+}
