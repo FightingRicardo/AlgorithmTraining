@@ -1,0 +1,159 @@
+Given two binary strings, return their sum (also a binary string).
+
+The input strings are both non-empty and contains only characters 1 or 0.
+
+Example 1:
+Input: a = "11", b = "1"
+Output: "100"
+
+Example 2:
+Input: a = "1010", b = "1011"
+Output: "10101"
+
+Link: https://leetcode-cn.com/problems/add-binary
+/*************************************************************/
+package LeetCode;
+
+import java.math.BigDecimal;
+
+public class AddBinary {
+	public StringBuffer ctmp = new StringBuffer();
+    public String addBinary(String a, String b) { 	
+    	if(a.length()==0 || b.length()==0)
+    		return "";
+    	
+    	StringBuffer atmp = new StringBuffer(a);
+    	atmp.reverse();
+    	StringBuffer btmp = new StringBuffer(b);
+    	btmp.reverse();   	
+    	int tmp = 0;
+    	int i = 0;
+    	while(i<atmp.length()) {
+    		int c = (atmp.charAt(i)-'0') + (btmp.charAt(i)-'0') + tmp;
+    		tmp = judge(c);    		
+    		i++;
+    		if(i >= btmp.length())
+    			break;   		
+    	}
+    	
+    	if(i<atmp.length()) {//case 1: atmp is longer
+    		while(tmp!=0) {
+    			int c = (atmp.charAt(i)-'0') + tmp;
+    			tmp = judge(c);
+        		i++;
+        		if(i >= atmp.length()) {
+        			ctmp.append("1");
+        			break;
+        		}        			
+    		}
+    		if(i < atmp.length()) 
+    			ctmp.append(atmp.substring(i));
+    	}
+    	else if(i<btmp.length()) {
+    		btmp.replace(0, i, atmp.toString());
+    		while(tmp!=0) {
+    			int c = (btmp.charAt(i)-'0') + tmp;
+    			tmp = judge(c);
+        		i++;
+        		if(i >= btmp.length()) {
+        			ctmp.append("1");
+        			break;
+        		}        			
+    		}  
+    		if(i < btmp.length()) 
+    			ctmp.append(btmp.substring(i));
+    	}
+    	else {
+    		if(tmp == 1) 
+    			ctmp.append("1");			
+    	}
+    	return String.valueOf(ctmp.reverse());
+    }
+    private int judge(int c) {
+    	int tmp = 0;
+		switch(c) {
+			case 1://1+0
+				ctmp.append(String.valueOf(c));
+				break;
+			case 0://0+0   
+				ctmp.append(String.valueOf(c));
+				break;
+			case 2://1+1
+				ctmp.append("0");
+				tmp = 1;
+				break;
+			case 3://(1+1)+1
+				ctmp.append("1");
+				tmp = 1;
+				break;   		
+		}
+		return tmp;
+    }
+    
+    public String addBinary2(String a, String b) {//solution2
+    	int aLength = a.length();
+    	int bLength = b.length();
+    	if(aLength < bLength) return addBinary(b, a);/***/
+    	//authorL: dada-5
+    	//Link: https://leetcode-cn.com/problems/add-binary/solution/qu-chang-qiao-jie-by-dada-5/
+
+    	int i = aLength - 1;
+    	int j = bLength - 1;
+    	int tmp = 0;
+    	while(i>=0) {
+    		int c = (j >= 0) ? (a.charAt(i)-'0')+(b.charAt(j)-'0')+tmp : (a.charAt(i)-'0')+tmp;/***/
+    		tmp = 0;
+    		switch(c) {
+				case 1://1+0
+					ctmp.append(String.valueOf(c));
+					break;
+				case 0://0+0   
+					ctmp.append(String.valueOf(c));
+					break;
+				case 2://1+1
+					ctmp.append("0");
+					tmp = 1;
+					break;
+				case 3://(1+1)+1
+					ctmp.append("1");
+					tmp = 1;
+					break;   		
+    		}
+    		i--;
+    		j--;
+    	}
+    	if(tmp == 1)
+    		ctmp.append("1");   	
+    	return String.valueOf(ctmp.reverse());  	
+    }
+    
+    public String addBinary3(String a, String b) {
+        StringBuilder ans = new StringBuilder();
+        int ca = 0;
+        for(int i = a.length() - 1, j = b.length() - 1;i >= 0 || j >= 0; i--, j--) {
+            int sum = ca;
+            sum += i >= 0 ? a.charAt(i) - '0' : 0;
+            sum += j >= 0 ? b.charAt(j) - '0' : 0;
+            ans.append(sum % 2);
+            ca = sum / 2;
+        }
+        ans.append(ca == 1 ? ca : "");
+        return ans.reverse().toString();
+        //author: guanpengchn
+        //Link: https://leetcode-cn.com/problems/add-binary/solution/hua-jie-suan-fa-67-er-jin-zhi-qiu-he-by-guanpengch/
+    }
+
+	public static void main(String[] args) {
+		//String a = "10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101";
+		//String b = "110101001011101110001111100110001010100001101011101010000011011011001011101111001100000011011110011";
+		
+		String a = "1";
+		String b = "11";
+		
+		AddBinary ab = new AddBinary();
+		String plus = ab.addBinary2(a, b);
+		System.out.println(plus);
+
+	}
+
+}
