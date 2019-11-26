@@ -17,4 +17,4 @@ Notebook of algorithm training using LeetCode
 0053MaxSubarraySum        -->Dynamic Planning
 0058LastWordLength        -->String operation
 0066PlusOne               -->Algorithm
-0067PlusOne               -->Algorithm,char2int
+0067AddBinary             -->Algorithm,char2int
