@@ -1,0 +1,101 @@
+You are climbing a stair case. It takes n steps to reach to the top.
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+Note: Given n will be a positive integer.
+
+Example 1:
+Input: 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+
+Example 2:
+Input: 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+
+Link: https://leetcode-cn.com/problems/climbing-stairs
+/************************************************************************/
+
+package LeetCode;
+
+public class ClimbStairs {
+
+
+    public int climbStairs(int n) {
+    	int i = 4;
+        if(i==0)
+        	return solution1(0, n);
+        else if(i==1) {
+        	int memo[] = new int[n + 1];
+            return solution2(0, n, memo);
+        }
+        else if(i==2)
+        	return solution3(n);
+        else if(i==4)
+        	return mysolution(n);
+    	return 0;
+    }
+    
+    public int solution1(int i, int n) {
+        if (i > n)
+            return 0;
+        if (i == n) 
+            return 1;
+        return solution1(i + 1, n) + solution1(i + 2, n);
+    }
+    public int solution2(int i, int n, int memo[]) {
+        if (i > n) {
+            return 0;
+        }
+        if (i == n) {
+            return 1;
+        }
+        if (memo[i] > 0) {
+            return memo[i];
+        }
+        memo[i] = solution2(i + 1, n, memo) + solution2(i + 2, n, memo);
+        return memo[i];
+    }
+    public int solution3(int n) {
+    	if(n==1)
+    		return 1;
+    	int[] f = new int[n+1];
+    	f[0]=0;
+    	f[1]=1;
+    	f[2]=2;
+    	for(int i = 3; i <= n; i++) {
+    		f[i] = f[i-1]+f[i-2];
+    	}
+    	return f[n];//Q:why not return f[n+1]? A:f[n] is the nth result 
+    }
+    //author: LeetCode
+    //Link: https://leetcode-cn.com/problems/climbing-stairs/solution/pa-lou-ti-by-leetcode/
+    public int mysolution(int n) {
+    	if(n==1)
+    		return 1;
+    	int fpre = 0;
+    	int fprepre = 1;
+    	int tmp = 0;
+    	for(int i = 0; i <= n; i++) {//pay attention to the border!!
+    		tmp = fpre + fprepre;
+    		fprepre = fpre;
+    		fpre = tmp;   		
+    	}
+    	return tmp;
+    }
+	public static void prt(String s) {
+		System.out.println(s);
+	}
+    public static void main(String[] args) {
+		int n = 6;
+		ClimbStairs cs = new ClimbStairs();
+		int numOfSolution = cs.climbStairs(n);
+		
+		prt(String.valueOf(numOfSolution));		
+	}
+
+}
