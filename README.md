@@ -13,9 +13,10 @@ Notebook of algorithm training using LeetCode
 0027RemoveElement         -->two pointer
 0028FindStringLocation    -->pay attention to the border condition
 0035SearchInsert          -->half search, pay attention to the border condition
-0038CountAndSay           -->stack,StringBuffer,Queue, and most importantly, the algorithm
+0038CountAndSay           -->stack, StringBuffer, Queue, and most importantly, the algorithm
 0053MaxSubarraySum        -->Dynamic Planning
 0058LastWordLength        -->String operation
 0066PlusOne               -->Algorithm
 0067AddBinary             -->Algorithm,char2int
 0069Sqrt(X)               -->Bit manipulation, binary search, long type
+0070ClimbStairs           -->Dynamic Planning, pay attention to the border condition
