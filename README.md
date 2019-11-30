@@ -20,3 +20,4 @@ Notebook of algorithm training using LeetCode
 0067AddBinary             -->Algorithm,char2int
 0069Sqrt(X)               -->Bit manipulation, binary search, long type
 0070ClimbStairs           -->Dynamic Planning, pay attention to the border condition
+0083RemoveRepeatNode      -->ListNode**
