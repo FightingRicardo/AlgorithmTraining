@@ -2,6 +2,9 @@
 Notebook of algorithm training using LeetCode
 
 # Summarization of the practise(LeetCode)
+
+/******************************************esay***********************************************/
+
 0001TwoSum                -->HashMap***
 0007ReverseInteger        -->Calculation operation (division and mode methods), and range of data format
 0009PalindromeNumber	    -->Operation of chars/strings, also the algorithm
@@ -21,3 +24,6 @@ Notebook of algorithm training using LeetCode
 0069Sqrt(X)               -->Bit manipulation, binary search, long type
 0070ClimbStairs           -->Dynamic Planning, pay attention to the border condition
 0083RemoveRepeatNode      -->ListNode**
+/******************************************medium***********************************************/
+
+0002AddTwoNumbers         -->ListNode*
