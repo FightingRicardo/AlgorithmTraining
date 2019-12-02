@@ -1,0 +1,85 @@
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Example:
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+Explanation: 342 + 465 = 807.
+
+Link: https://leetcode-cn.com/problems/add-two-numbers
+/************************************************************************************************/
+
+package LeetCode;
+
+public class AddTwoNumbers {
+
+	
+    static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    	ListNode sum = new ListNode(0);
+    	ListNode flag = sum;
+    	int tmp1 = 0;
+        
+        if(l1 == null && l2 == null)
+        	return new ListNode(0);
+        
+        while(l1 != null || l2 != null) {
+        	int val1 = (l1 != null)? l1.val : 0;
+        	int val2 = (l2 != null)? l2.val : 0;
+        	
+        	int tmp2 = (val1 + val2 + tmp1) % 10;//unit digit
+        	tmp1 = (val1 + val2 + tmp1) / 10;//tens digit
+        	
+        	flag.next = new ListNode(tmp2);   	     	
+        	
+        	try{l1 = l1.next;}
+        	catch(Exception e){l1 = null;}     		
+        	
+        	try {l2 = l2.next;}
+        	catch(Exception e){l2 = null;}
+        	
+        	flag = flag.next;
+        }
+        if(tmp1 != 0)
+        	flag.next = new ListNode(tmp1);
+        sum = sum.next;
+        return sum;
+    }
+    
+	static void prt(String s) {
+		System.out.println(s);
+	}
+	
+	public static void main(String[] args) {
+		ListNode l11 = new ListNode(3);
+		ListNode l12 = new ListNode(3);
+		ListNode l13 = new ListNode(3);
+		ListNode l14 = new ListNode(3);
+		ListNode l15 = new ListNode(4);
+		
+//		l11.next = l12;
+//		l12.next = l13;
+//		l13.next = l14;
+//		l14.next = l15;
+		
+		ListNode l21 = new ListNode(9);
+		ListNode l22 = new ListNode(6);
+		ListNode l23 = new ListNode(3);
+		ListNode l24 = new ListNode(3);
+		ListNode l25 = new ListNode(4);
+		
+		l21.next = l22;
+		l22.next = l23;
+//		l23.next = l24;
+//		l24.next = l25;
+		
+		ListNode sum = addTwoNumbers(l11,l21);
+
+		prt(String.valueOf(sum.val));		
+		while(sum.next != null) {
+			prt(String.valueOf(sum.next.val));
+			sum = sum.next;
+		}
+	}
+
+}
