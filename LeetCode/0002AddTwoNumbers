@@ -32,11 +32,14 @@ public class AddTwoNumbers {
         	
         	flag.next = new ListNode(tmp2);   	     	
         	
-        	try{l1 = l1.next;}
-        	catch(Exception e){l1 = null;}     		
+	        if(l1 != null) l1 = l1.next ;//dump node
+        	if(l2 != null) l2 = l2.next ;
+		
+        	//try{l1 = l1.next;}
+        	//catch(Exception e){l1 = null;}     		
         	
-        	try {l2 = l2.next;}
-        	catch(Exception e){l2 = null;}
+        	//try {l2 = l2.next;}
+        	//catch(Exception e){l2 = null;}
         	
         	flag = flag.next;
         }
