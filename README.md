@@ -27,3 +27,4 @@ Notebook of algorithm training using LeetCode
 /******************************************medium***********************************************/
 
 0002AddTwoNumbers         -->ListNode*, dump node
+0003LongestSubstringWithoutRepeatingCharacters      -->Algorithm
