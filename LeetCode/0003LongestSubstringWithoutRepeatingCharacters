@@ -21,6 +21,9 @@ Link: https://leetcode-cn.com/problems/longest-substring-without-repeating-chara
 
 package LeetCode;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class LengthOfLongestSubstring {
 
     static int lengthOfLongestSubstring(String s) {
@@ -33,32 +36,68 @@ public class LengthOfLongestSubstring {
         	return 0;
         
         int j = i + 1;
-        
-        while(j<s.length()) {
-        	int tmpi = i;
-        	for(int k = j-1; k >= i; k--) {
-        		if(s.charAt(j) == s.charAt(k)) {
-        			tmpi = k + 1;
-        			break;
-        		}        		
-        	}
-        	if(i == tmpi) {
-        		maxLengthCount = (maxLengthCount < (j-i+1))? (j-i+1):(maxLengthCount - 0);
-        		j++;
-        	}
-        	else {
-        		i = tmpi;
-        		j = i+1;
-        	}	
-        }
+
+        //go to solution 1
+        //go to solution 2
+        //go to solution3
+
     	return maxLengthCount;
+    }
+    
+    private void solution1() { 	
+//        while(j<s.length()) {
+//        	int tmpi = i;
+//        	for(int k = j-1; k >= i; k--) {
+//        		if(s.charAt(j) == s.charAt(k)) {
+//        			tmpi = k + 1;
+//        			break;
+//        		}        		
+//        	}
+//        	if(i == tmpi) {
+//        		maxLengthCount = (maxLengthCount < (j-i+1))? (j-i+1):(maxLengthCount - 0);
+//        		j++;
+//        	}
+//        	else {
+//        		i = tmpi;
+//        		j = i+1;
+//        	}	
+//        }
+    }
+    private void solution2() {
+//        HashSet<Character> set = new HashSet<Character>();
+//        set.add(s.charAt(i));
+//        while(j < s.length()) {
+//        	if(set.contains(s.charAt(j))) {
+//        		set.remove(s.charAt(i));
+//        		i++;
+//        	}
+//        	else {
+//        		set.add(s.charAt(j));
+//        		j++;
+//        	}
+//        	maxLengthCount = Math.max(maxLengthCount, j-i);//because j has been added 1
+//        }
+    }
+    private void solution3() {
+//        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+//        map.put(s.charAt(i), i);
+//        while(j < s.length()) {
+//        	if(map.containsKey(s.charAt(j)))
+//        		//in case there are more than one key equal to s[j]
+//        		//jump the next index of the one of repeat element
+//        		i = Math.max(map.get(s.charAt(j)) + 1, i);
+////        		i = map.get(s.charAt(j)) + 1;
+//        	map.put(s.charAt(j), j);
+//        	maxLengthCount = Math.max(maxLengthCount, j - i + 1);
+//        	j++;       	
+//        }
     }
     
     static void prt(String s) {
     	System.out.println(s);
     }
 	public static void main(String[] args) {
-		String s = "abcabdccdabaddefacf";
+		String s = "abccddcbaec";
 		int maxLengthCount = lengthOfLongestSubstring(s);
 		prt(String.valueOf(maxLengthCount));
 	}
