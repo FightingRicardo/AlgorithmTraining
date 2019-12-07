@@ -57,20 +57,20 @@ public class LongestPalindrome {
         		}
         		j = k;
     		}
-			while(i-j>=0 && i+j<n) {
-				String sub = s.substring(i-j, i+j+1);
-				boolean isPalindrome = judgePalindrome(sub);
-    			if(isPalindrome == true) {
-    				if (j>k) {
-    					m = i;
-    					h = 0;
-    					k = j;
-    				}
-    			}
-    			j++;
+		while(i-j>=0 && i+j<n) {
+			String sub = s.substring(i-j, i+j+1);
+			boolean isPalindrome = judgePalindrome(sub);
+		if(isPalindrome == true) {
+			if (j>k) {
+				m = i;
+				h = 0;
+				k = j;
 			}
-			j=k;    		
-    		i++;
+		}
+		j++;
+		}
+		j=k;    		
+	i++;
     	}    
     	return s.substring(m-k, m+h+k+1);
     }
