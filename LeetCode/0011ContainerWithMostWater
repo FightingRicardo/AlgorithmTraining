@@ -1,0 +1,74 @@
+Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+Note: You may not slant the container and n is at least 2.
+
+Example:
+Input: [1,8,6,2,5,4,8,3,7]
+Output: 49
+
+Link：https://leetcode-cn.com/problems/container-with-most-water
+/***********************************************************************/
+package LeetCode;
+
+public class MaxArea {
+
+    public int solution1(int[] height) {
+        if(height.length < 2 || height == null)
+        	return 0;
+    	
+        int pre = 0, post = 1;
+        int size = 0;
+        while(pre<height.length-1) {
+        	while(post<height.length) {
+        		int s1 = (Math.min(height[pre], height[post]))*(post-pre);
+        		size = Math.max(size, s1);
+        		
+        		post++;
+        	}      	
+        	pre++;
+        	post = pre + 1;
+        }
+    	return size;
+    	//ac
+    }
+    
+    public int solution2(int[] height) {
+        if(height.length < 2 || height == null)
+        	return 0;
+    	
+        int pre = 0, post = 1;
+        int size = 0;
+        int j=pre;//for the highest
+        while(post<height.length) {
+        	
+        	
+        	int k = (height[pre+1]>height[pre])? (pre+1): pre;//for the next
+        	
+        	int snew = (Math.min(height[pre], height[post]))*(post-pre);
+        	int snext = (Math.min(height[k], height[post]))*(post-k);        	
+        	int shigh = (Math.min(height[j], height[post]))*(post-j);
+        	
+        	size = Math.max(size, Math.max(Math.max(snew,snext),shigh));
+        	
+        	if(size == snext && k != pre) {pre++;}
+        	if(size == shigh && j != pre) {pre=j;}
+        	
+        	j = (height[post]>height[j])? post: j;//for the highest
+        	
+        	post++;
+        }
+    	return size;
+    }
+    
+    static void prt(String s) {
+    	System.out.println(s);
+    }
+	public static void main(String[] args) {
+		int[] height = {1,2,3,4,5,6,7,8,9,10};//{2,3,4,5,18,17,6};//{1,8,6,2,5,4,8,3,7};
+		
+		MaxArea ma = new MaxArea();
+		int size = ma.solution2(height);
+
+		prt(String.valueOf(size));
+	}
+
+}
