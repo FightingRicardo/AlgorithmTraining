@@ -31,3 +31,10 @@ Notebook of algorithm training using LeetCode
 0002AddTwoNumbers               -->ListNode*, dump node
 0003LengthOfLongestSubstring    -->Algorithm, slide window
 0005LongestPalindrome           -->Algorithm?
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+/******************************************array***********************************************/
+
+0001TwoSum                      -->HashMap***
+0011ContainerWithMostWater
