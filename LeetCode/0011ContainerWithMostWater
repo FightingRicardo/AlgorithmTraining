@@ -16,18 +16,18 @@ public class MaxArea {
         	return 0;
     	
         int pre = 0, post = 1;
-        int size = 0;
+        int maxsize = 0;
         while(pre<height.length-1) {
         	while(post<height.length) {
-        		int s1 = (Math.min(height[pre], height[post]))*(post-pre);
-        		size = Math.max(size, s1);
+        		int newsize = (Math.min(height[pre], height[post]))*(post-pre);
+        		maxsize = Math.max(maxsize, newsize);
         		
         		post++;
         	}      	
         	pre++;
         	post = pre + 1;
         }
-    	return size;
+    	return maxsize;
     	//ac
     }
     
@@ -38,37 +38,73 @@ public class MaxArea {
         int pre = 0, post = 1;
         int size = 0;
         int j=pre;//for the highest
-        while(post<height.length) {
-        	
-        	
-        	int k = (height[pre+1]>height[pre])? (pre+1): pre;//for the next
-        	
-        	int snew = (Math.min(height[pre], height[post]))*(post-pre);
-        	int snext = (Math.min(height[k], height[post]))*(post-k);        	
-        	int shigh = (Math.min(height[j], height[post]))*(post-j);
-        	
-        	size = Math.max(size, Math.max(Math.max(snew,snext),shigh));
-        	
-        	if(size == snext && k != pre) {pre++;}
-        	if(size == shigh && j != pre) {pre=j;}
-        	
-        	j = (height[post]>height[j])? post: j;//for the highest
-        	
-        	post++;
+        while(post<height.length) {   	        	
+		int k = (height[pre+1]>height[pre])? (pre+1): pre;//for the next
+
+		int snew = (Math.min(height[pre], height[post]))*(post-pre);
+		int snext = (Math.min(height[k], height[post]))*(post-k);        	
+		int shigh = (Math.min(height[j], height[post]))*(post-j);
+
+		size = Math.max(size, Math.max(Math.max(snew,snext),shigh));
+
+		if(size == snext && k != pre) {pre++;}
+		if(size == shigh && j != pre) {pre=j;}
+
+		j = (height[post]>height[j])? post: j;//for the highest
+
+		post++;
         }
     	return size;
     }
     
-    static void prt(String s) {
-    	System.out.println(s);
-    }
+	public int solution3(int[] height) {
+		if(height.length<2 || height == null)
+			return 0;
+		
+		int pre = 0;
+		int post = height.length-1;
+		int maxsize = 0;
+		while(pre<post) {
+			int newsize = Math.min(height[pre], height[post])*(post-pre);
+			maxsize = Math.max(maxsize, newsize);
+			if(height[pre]>height[post])
+				post--;
+			else
+				pre++;
+		}
+		return maxsize;
+	}
+    
+	public int solution4(int[] height) {
+		if(height.length<2 || height == null)
+			return 0;
+		
+		int pre = 0;
+		int post = height.length-1;
+		int maxsize = Math.min(height[pre], height[post])*(post-pre);
+		while(pre<post) {
+			int leftheight = Math.max(height[pre], height[pre+1]);
+			pre = (height[pre]<height[pre+1])?(pre+1):pre;
+			int rightheight = Math.max(height[post-1], height[post]);
+			post = (height[post]<height[post-1])?(post-1):post;
+			int newsize = Math.min(leftheight, rightheight)*(post-pre);
+			
+			maxsize = Math.max(maxsize, newsize);			
+		}
+		return maxsize;
+	}
+	static void prt(String s) {
+		System.out.println(s);
+	}
+    
 	public static void main(String[] args) {
-		int[] height = {1,2,3,4,5,6,7,8,9,10};//{2,3,4,5,18,17,6};//{1,8,6,2,5,4,8,3,7};
+		int[] height = {1,3,1,8,3,7,4,1,2};//{2,3,4,5,18,17,6};//{1,8,6,2,5,4,8,3,7};
 		
 		MaxArea ma = new MaxArea();
-		int size = ma.solution2(height);
+		int size = ma.solution4(height);
 
 		prt(String.valueOf(size));
 	}
 
 }
+
