@@ -38,4 +38,5 @@ Notebook of algorithm training using LeetCode
 
 0001TwoSum                      -->HashMap***
 0011ContainerWithMostWater      -->Algorithm, two pointers
-0015ThreeSum                    -->Data structure(HashMap, List, StringBuffer), sort
+0015ThreeSum                    -->Data structure(HashMap, List, StringBuffer), sort, two pointer
+0016ThreeSumClosest             -->two pointer
