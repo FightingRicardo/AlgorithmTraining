@@ -1,0 +1,74 @@
+Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+
+Example:
+Given array nums = [-1, 2, 1, -4], and target = 1.
+The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+
+Link: https://leetcode-cn.com/problems/3sum-closest
+
+/**********************************************************/
+package LeetCode;
+
+import java.util.Arrays;
+
+public class ThreeSumClosest {
+
+	static int solution1(int[] nums, int target) {
+		if(nums.length<3 || nums == null)
+			return 0;
+		
+		int n = nums.length;
+		int achor = 0, pre = achor + 1, post = n - 1;
+		int diff = 100000000, sum = 0, minsum = 10000000;
+		
+		Arrays.sort(nums);
+		
+		while(achor<=n-2) {
+			while(pre<post) {
+				sum = nums[achor]+nums[pre]+nums[post];
+				if(diff>Math.abs(target-sum)) {
+					diff = Math.abs(target-sum);
+					minsum = sum;
+				}
+				if(sum<target) pre++;
+				else if (sum>target) post--;
+				else if (sum==target) return minsum;				
+			}
+			achor++;pre=achor+1;post=n-1;
+		}
+		return minsum;
+	}
+	
+  static int solution2(int[]nums, int target) {
+    if(nums.length<3 || nums == null)
+      return 0;
+
+    int n = nums.length;
+    int diff = 100000000, sum = 0, minsum = 10000000;
+    for(int i=0;i<n-2;i++) {
+      for(int j=i+1;j<n-1;j++) {
+        for(int k=j+1;k<n;k++) {
+          sum = nums[i]+nums[j]+nums[k];
+          if(diff>Math.abs(target-sum)) {
+            diff = Math.abs(target-sum);
+            minsum = sum;
+          }
+
+        }
+
+      }
+
+    }
+    return minsum;
+}
+	
+	static void prt(String s) {System.out.println(s);}
+	
+	public static void main(String[] args) {
+		int[] nums = {-1,2,1,-4};
+		int target = 1;
+		int re = ThreeSumClosest.solution2(nums, target);
+		prt(String.valueOf(re));
+	}
+
+}
