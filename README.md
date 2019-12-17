@@ -40,3 +40,4 @@ Notebook of algorithm training using LeetCode
 0011ContainerWithMostWater      -->Algorithm, two pointers
 0015ThreeSum                    -->Data structure(HashMap, List, StringBuffer), sort, two pointer
 0016ThreeSumClosest             -->two pointer
+0033SearchRotatedArray          -->Binary search
