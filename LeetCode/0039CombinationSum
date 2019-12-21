@@ -1,0 +1,86 @@
+Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
+
+The same repeated number may be chosen from candidates unlimited number of times.
+
+Note:
+All numbers (including target) will be positive integers.
+The solution set must not contain duplicate combinations.
+
+Example 1:
+Input: candidates = [2,3,6,7], target = 7,
+A solution set is:
+[
+  [7],
+  [2,2,3]
+]
+
+Example 2:
+Input: candidates = [2,3,5], target = 8,
+A solution set is:
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]
+
+Link: https://leetcode-cn.com/problems/combination-sum
+/*********************************************************************/
+package LeetCode;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class CombinationSum {
+
+    public ArrayList<ArrayList<Integer>> easyversion(int[] candidates, int target) {
+    	ArrayList<ArrayList<Integer>> res1 = new ArrayList<ArrayList<Integer>>();
+    	
+    	if(candidates == null && candidates.length < 1)
+    		return res1;
+    	
+    	Arrays.sort(candidates);
+    	backtracking_easy(candidates, 0, target, res1, new ArrayList<Integer>());    	
+    	return res1;
+    }
+    
+	private void backtracking_easy(int[] nums, int start, int target, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> list) {
+		if(target<0) return;
+		else if(target==0) { 
+			res.add(new ArrayList<>(list));
+			return;
+		}
+		else {
+			for(int i = start; i < nums.length && target > 0; i++) {
+				//target -= nums[i];
+				list.add(nums[i]);
+				backtracking_easy(nums, i, target - nums[i], res, list);
+				list.remove(list.size()-1);//remove the last element
+			}
+		}
+		
+	}
+
+	static void prt(String s) {
+		System.out.print(s);
+	}
+	
+	public static void main(String[] args) {
+		int[] candidate = {7,4,5,1,3,6,2};
+		int target = 1;
+		
+		CombinationSum cs = new CombinationSum();
+		ArrayList<ArrayList<Integer>> result = cs.easyversion(candidate, target);
+
+		for(int i = 0;i<result.size();i++) {
+			ArrayList<Integer> tmplist = result.get(i);
+			System.out.println("Array "+String.valueOf(i));
+			for(int j = 0;j<tmplist.size();j++) {
+				prt(String.valueOf(tmplist.get(j))+",");
+			}
+			System.out.println("");
+		}
+		
+	}
+
+}
