@@ -41,3 +41,6 @@ Notebook of algorithm training using LeetCode
 0015ThreeSum                    -->Data structure(HashMap, List, StringBuffer), sort, two pointer
 0016ThreeSumClosest             -->two pointer
 0033SearchRotatedArray          -->Binary search
+0034FindRangofElement           -->Binary search
+0039CombinationSum              -->Backtracking
+0040CombinationSum              -->Backtracking
