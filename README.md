@@ -43,4 +43,5 @@ Notebook of algorithm training using LeetCode
 0033SearchRotatedArray          -->Binary search
 0034FindRangofElement           -->Binary search
 0039CombinationSum              -->Backtracking
-0040CombinationSum              -->Backtracking
+0040CombinationSum2             -->Backtracking
+0048RotateImage                 -->Algorithm
