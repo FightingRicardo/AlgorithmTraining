@@ -1,0 +1,101 @@
+You are given an n x n 2D matrix representing an image.
+
+Rotate the image by 90 degrees (clockwise).
+
+Note:
+You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.
+
+Example 1:
+Given input matrix = 
+[
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+],
+rotate the input matrix in-place such that it becomes:
+[
+  [7,4,1],
+  [8,5,2],
+  [9,6,3]
+]
+
+Example 2:
+Given input matrix =
+[
+  [ 5, 1, 9,11],
+  [ 2, 4, 8,10],
+  [13, 3, 6, 7],
+  [15,14,12,16]
+], 
+rotate the input matrix in-place such that it becomes:
+[
+  [15,13, 2, 5],
+  [14, 3, 4, 1],
+  [12, 6, 8, 9],
+  [16, 7,10,11]
+]
+
+Link: https://leetcode-cn.com/problems/rotate-image
+/**************************************************************
+package LeetCode;
+
+public class MatrixRotation {
+
+	static void rotate1(int[][] matrix) {
+	    
+		int n = matrix.length;
+	    // transpose matrix
+		for (int i = 0; i < n; i++) {
+		  for (int j = i; j < n; j++) {
+		    int tmp = matrix[j][i];
+		    matrix[j][i] = matrix[i][j];
+		    matrix[i][j] = tmp;
+		  }
+		}
+
+		// reverse each row
+		for (int i = 0; i < n; i++) {
+		  for (int j = 0; j < n / 2; j++) {
+		    int tmp = matrix[i][j];
+		    matrix[i][j] = matrix[i][n - j - 1];
+		    matrix[i][n - j - 1] = tmp;
+		  }
+		}
+	}
+
+	static void rotate2(int[][] matrix) {
+		if(matrix.length ==0 || matrix == null)
+			return;
+		
+		int n = matrix.length;
+		for(int i = 0; i < (n+1)/2; i++) {
+			for(int j = i; j <= n-2-i; j++) {
+				int tmp = matrix[i][j];
+				
+//				prt(String.valueOf(matrix[n-j-1][i]));
+				matrix[i][j] = matrix[n-j-1][i];		
+//				prt(String.valueOf(matrix[n-j-1][n-j-1]));
+				matrix[n-j-1][i] = matrix[n-i-1][n-j-1];				
+//				prt(String.valueOf(matrix[j][n-j-1]));
+				matrix[n-i-1][n-j-1] = matrix[j][n-i-1];					
+//				prt(String.valueOf(tmp));
+				matrix[j][n-i-1] = tmp;
+			}			
+		}		
+	}
+	  
+	static void prt(String s) {
+		System.out.println(s);
+	}
+	
+	public static void main(String[] args) {
+		int[][] nums = {{1}};//{1,2,3},{4,5,6},{7,8,9}
+		
+		int numOfcol = nums[0].length;
+		int numOfrow = nums.length;
+		
+		rotate2(nums);
+		prt(String.valueOf((3+1)/2));
+	}
+
+}
